@@ -1,5 +1,14 @@
 # SwiftGit2
 
+> [!WARNING]
+> The SwiftGit2 maintainers are in the process of migrating SwiftGit2 to the Swift Package Manager.
+> 
+> This causes the following breaking changes:
+>
+> * The Carthage configuration and Xcode project are gone and are longer supported.
+> * SwiftGit2 must now be explicitly initialized by the application by calling `SwiftGit2.initialize()`. Its resources may be cleaned up again using `SwfitGit2.shutdown()`.
+> * The dependency libssh2 is not yet integrated. The impact is that SwiftGit2 on iOS cannot interact with remote repositories over SSH. (Remotes that use HTTPS are supported using the HTTP client that ships with libgit2.)
+
 [![Build Status](https://github.com/SwiftGit2/SwiftGit2/actions/workflows/BuildPR.yml/badge.svg)](https://github.com/SwiftGit2/SwiftGit2/actions)
 [![GitHub release](https://img.shields.io/github/release/SwiftGit2/SwiftGit2.svg)](https://github.com/SwiftGit2/SwiftGit2/releases)
 ![Swift 5.9.x](https://img.shields.io/badge/Swift-5.9.x-orange.svg)
@@ -31,7 +40,8 @@ case let .failure(error):
 ```
 
 ## Design
-SwiftGit2 uses value objects wherever possible. That means using Swift’s `struct`s and `enum`s without holding references to libgit2 objects. This has a number of advantages:
+
+SwiftGit2 uses value types wherever possible. That means using Swift’s `struct`s and `enum`s without holding references to libgit2 objects. This has a number of advantages:
 
 1. Values can be used concurrently.
 2. Consuming values won’t result in disk access.
@@ -42,9 +52,11 @@ This vastly simplifies the design of long-lived applications, which are the most
 All methods for reading from or writing to a repository are on SwiftGit’s only `class`: `Repository`. This highlights the failability and mutation of these methods, while freeing up all other instances to be immutable `struct`s and `enum`s.
 
 ## Adding SwiftGit2 to your Project
+
 You can add SwiftGit2 to your project using the [Swift Package Manager](https://www.swift.org/documentation/package-manager/).
 
 In Xcode, go to your project settings, then to `Package Dependencies`. Add SwiftGit2 using the URL:
+
 ```
 https://github.com/SwiftGit2/SwiftGit2.git
 ```
@@ -61,14 +73,16 @@ And don't forget to reference it from your target:
 .target(name: "YourProject", dependencies: ["SwiftGit2"]),
 ```
 
-## Building SwiftGit2 Manually
-If you want to build and test SwiftGit2 locally for development:
+## Developing SwiftGit2
+
+If you want to build and test SwiftGit2 locally for development purposes:
 
 1. Clone SwiftGit2
 2. Run `git submodule update --init` to clone the libgit2 submodule
 3. Run `swift test` or open the `Package.swift` file to develop and test using Xcode
 
 ## Contributions
+
 We :heart: to receive pull requests! GitHub makes it easy:
 
 1. Fork the repository
@@ -78,4 +92,5 @@ We :heart: to receive pull requests! GitHub makes it easy:
 All contributions should match GitHub’s [Swift Style Guide](https://github.com/github/swift-style-guide).
 
 ## License
+
 SwiftGit2 is available under the [MIT license](https://github.com/SwiftGit2/SwiftGit2/blob/master/LICENSE.md).
