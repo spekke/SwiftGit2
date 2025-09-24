@@ -6,7 +6,7 @@
 > This causes the following breaking changes:
 >
 > * The Carthage configuration and Xcode project are gone and are longer supported.
-> * SwiftGit2 must now be explicitly initialized by the application by calling `SwiftGit2.initialize()`. Its resources may be cleaned up again using `SwfitGit2.shutdown()`.
+> * SwiftGit2 must now be explicitly initialized by the application by calling `SwiftGit2Init()`. Its resources may be cleaned up again using `SwiftGit2Shutdown()`.
 > * The dependency libssh2 is not yet integrated. The impact is that SwiftGit2 on iOS cannot interact with remote repositories over SSH. (Remotes that use HTTPS are supported using the HTTP client that ships with libgit2.)
 
 [![Build Status](https://github.com/SwiftGit2/SwiftGit2/actions/workflows/BuildPR.yml/badge.svg)](https://github.com/SwiftGit2/SwiftGit2/actions)
